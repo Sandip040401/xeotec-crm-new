@@ -128,3 +128,15 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Frontend-specific
+/frontend/node_modules/
+/frontend/build/
+/frontend/dist/
+/frontend/.env
+
+# Backend-specific
+/backend/node_modules/
+/backend/dist/
+/backend/.env
+package-lock.json
