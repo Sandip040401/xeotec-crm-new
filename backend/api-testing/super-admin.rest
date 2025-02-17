@@ -1,0 +1,18 @@
+POST http://localhost:8000/api/users/superadmin/create
+Content-Type: application/json
+
+{
+    "email": "admin@xeotec.in",
+    "password": "Xeotec@2018#",
+    "name": "CRM Administrator",
+    "role": "superadmin"
+}
+
+### Login as Super Admin
+POST http://localhost:8000/api/auth/superadmin/login
+Content-Type: application/json
+
+{
+    "email": "admin@xeotec.in",
+    "password": "Xeotec@2018#"
+}
