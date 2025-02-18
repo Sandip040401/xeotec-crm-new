@@ -140,3 +140,4 @@ dist
 /backend/dist/
 /backend/.env
 package-lock.json
+.vscode/
