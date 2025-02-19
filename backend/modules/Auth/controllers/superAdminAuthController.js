@@ -1,6 +1,8 @@
 // Login with OTP for Super Admin
 
 const getMaskedEmail = require("../../../common/utils/maskEmail");
+const sendMail = require("../../Email/emailService");
+const emailTemplates = require("../../Email/emailTemplates");
 const SuperAdmin = require("../../User/models/SuperAdmin");
 const bcrypt = require("bcryptjs");
 
@@ -40,8 +42,11 @@ const login = async (req, res) => {
 
     // Send OTP to user's email
 
-    // mail content
-    //
+    await sendMail({
+      to: user.email,
+      subject: `${user.name}, please verify your account`,
+      templateData: emailTemplates.otpVerification(user.name, otp),
+    });
 
     return res.status(200).json({
       success: true,
