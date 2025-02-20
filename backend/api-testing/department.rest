@@ -1,0 +1,9 @@
+###
+POST http://localhost:8000/api/company/department/create
+Content-Type: application/json
+
+{
+    "name": "HR Department",
+    "description": "Human Resource Department",
+    "company": "67b70814423934916b53f80d"
+}
