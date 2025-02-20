@@ -1,4 +1,4 @@
-const transporter = require("../../common/config/mailer");
+const { transporter } = require("../../../common/config/mailer");
 
 const sendMail = async ({ to, cc, bcc, subject, templateData }) => {
   try {
@@ -8,13 +8,13 @@ const sendMail = async ({ to, cc, bcc, subject, templateData }) => {
     const bccRecipients = bcc && Array.isArray(bcc) ? bcc.join(", ") : bcc;
 
     // Generate email content using the chosen template data
-    const htmlContent = templateData
+    const htmlContent = templateData;
 
     // Set up the email options
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: toRecipients,  // Comma separated list or a single address
-      cc: ccRecipients,  // Optional
+      to: toRecipients, // Comma separated list or a single address
+      cc: ccRecipients, // Optional
       bcc: bccRecipients, // Optional
       subject,
       html: htmlContent,
