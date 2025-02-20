@@ -8,6 +8,7 @@ import SuperAdminProfile from "@/pages/SuperAdmin/SuperAdminProfile";
 import SuperAdminDashboard from "@/pages/SuperAdmin/SuperAdminDashboard";
 import SuperAdminLayout from "@/layouts/SuperAdmin/SuperAdminLayout";
 import AdminLayout from "@/layouts/Admin/AdminLayout";
+import SuperAdminSettings from "@/pages/SuperAdmin/SuperAdminSettings";
 
 const AdminRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AdminRoutes = () => {
         <Route path="/super-admin-dashboard" element={<SuperAdminLayout />}>
           <Route index element={<SuperAdminDashboard />} />
           <Route path="profile" element={<SuperAdminProfile />} />
+          <Route path="settings" element={<SuperAdminSettings />} />
         </Route>
       </Routes>
     </BrowserRouter>
