@@ -1,4 +1,4 @@
-const SuperAdmin = require("../models/SuperAdmin");
+const SuperAdmin = require("../models/SuperAdmin.js");
 const bcrypt = require("bcryptjs");
 
 const createSuperAdmin = async (req, res) => {
