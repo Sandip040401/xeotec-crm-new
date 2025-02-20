@@ -1,7 +1,7 @@
+import { Sidebar } from "@/pages/SuperAdmin/Sidebar";
 import { Outlet } from "react-router-dom";
-import Sidebar from "@/pages/Admin/Sidebar";
 
-const Dashboard = () => {
+const SuperAdminLayout = () => {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <Sidebar />
@@ -12,4 +12,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SuperAdminLayout;

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Home, User, Settings } from "lucide-react";
 import { NavLink, Outlet } from "react-router-dom"; // Ensure Outlet is imported
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -58,14 +58,3 @@ const Sidebar = () => {
   );
 };
 
-// Layout Component
-export default function Layout() {
-  return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 ml-20 p-4">
-        <Outlet /> {/* This renders the routed content */}
-      </main>
-    </div>
-  );
-}
