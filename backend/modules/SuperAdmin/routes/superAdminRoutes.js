@@ -1,7 +1,7 @@
 // routes for super admin
 
 const express = require("express");
-const { getSuperAdminProfile, updateSuperAdminProfile, superAdminLogin, createSuperAdmin } = require("../controllers/superAdminControllers");
+const { getSuperAdminProfile, updateSuperAdminProfile, superAdminLogin, createSuperAdmin } = require("../controllers/superAdminControllers.js");
 const superAdminRouter = express.Router();
 
 

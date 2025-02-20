@@ -12,6 +12,5 @@ router.use("/auth", authRouter);
 router.use("/company", companyRouter);
 router.use("/users", superAdminRouter);
 router.use("/users", userRouter);
-router.use("/landing", usersRouter);
 
 module.exports = router;
