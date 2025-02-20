@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,48 +10,58 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Trash, Pencil } from "lucide-react";
+import { Trash } from "lucide-react";
+
+const dummyData = [
+  {
+    _id: "1",
+    name: "Sales",
+    managers: [{ name: "Alice" }],
+    employees: [{ name: "Bob" }, { name: "Charlie" }],
+  },
+  {
+    _id: "2",
+    name: "Marketing",
+    managers: [{ name: "Dave" }],
+    employees: [{ name: "Eve" }],
+  },
+  {
+    _id: "3",
+    name: "HR",
+    managers: [{ name: "Frank" }],
+    employees: [{ name: "Grace" }],
+  },
+];
 
 const Department = () => {
-  const [departments, setDepartments] = useState([
-    { id: 1, name: "Sales" },
-    { id: 2, name: "Marketing" },
-    { id: 3, name: "HR" },
-  ]);
+  const [departments, setDepartments] = useState([]);
   const [newDept, setNewDept] = useState("");
-  const [editingId, setEditingId] = useState(null);
-  const [editValue, setEditValue] = useState("");
+
+  useEffect(() => {
+    setDepartments(dummyData);
+  }, []);
 
   const addDepartment = () => {
     if (newDept.trim() !== "") {
-      setDepartments([...departments, { id: Date.now(), name: newDept }]);
+      const newDepartment = {
+        _id: (departments.length + 1).toString(),
+        name: newDept,
+        managers: [],
+        employees: [],
+      };
+      setDepartments([...departments, newDepartment]);
       setNewDept("");
     }
   };
 
   const deleteDepartment = (id) => {
-    setDepartments(departments.filter((dept) => dept.id !== id));
-  };
-
-  const startEditing = (id, name) => {
-    setEditingId(id);
-    setEditValue(name);
-  };
-
-  const saveEdit = () => {
-    setDepartments(
-      departments.map((dept) =>
-        dept.id === editingId ? { ...dept, name: editValue } : dept
-      )
-    );
-    setEditingId(null);
-    setEditValue("");
+    setDepartments(departments.filter((dept) => dept._id !== id));
   };
 
   return (
-    <div className="p-6 ">
+    <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Departments</h1>
-      <Card className="">
+      <Card>
         <CardContent className="p-4">
           <div className="flex gap-2 mb-4">
             <Input
@@ -65,45 +75,30 @@ const Department = () => {
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
+                <TableHead>Managers</TableHead>
+                <TableHead>Employees</TableHead>
                 <TableHead>Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {departments.map((dept) => (
-                <TableRow key={dept.id}>
+                <TableRow key={dept._id}>
+                  <TableCell>{dept.name}</TableCell>
                   <TableCell>
-                    {editingId === dept.id ? (
-                      <Input
-                        value={editValue}
-                        onChange={(e) => setEditValue(e.target.value)}
-                      />
-                    ) : (
-                      dept.name
-                    )}
+                    {dept.managers?.map((mgr) => mgr.name).join(", ") || "None"}
                   </TableCell>
                   <TableCell>
-                    {editingId === dept.id ? (
-                      <Button onClick={saveEdit} size="sm">
-                        Save
-                      </Button>
-                    ) : (
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => startEditing(dept.id, dept.name)}
-                        >
-                          <Pencil size={16} />
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => deleteDepartment(dept.id)}
-                        >
-                          <Trash size={16} />
-                        </Button>
-                      </div>
-                    )}
+                    {dept.employees?.map((emp) => emp.name).join(", ") ||
+                      "None"}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => deleteDepartment(dept._id)}
+                    >
+                      <Trash size={16} />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

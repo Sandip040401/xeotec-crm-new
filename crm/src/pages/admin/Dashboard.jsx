@@ -1,59 +1,120 @@
-import { useState } from "react";
-import { Menu, X, Home, Users, BarChart, Settings } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
+} from "@/components/ui/table";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
-const Dashboard = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+const stats = [
+  { title: "Total Users", value: "1,250" },
+  { title: "New Leads", value: "320" },
+  { title: "Sales This Month", value: "$25,430" },
+  { title: "Active Tickets", value: "15" },
+];
 
+const recentActivities = [
+  { id: 1, activity: "John Doe created a new lead", date: "Feb 20, 2025" },
+  { id: 2, activity: "Alice Johnson closed a deal", date: "Feb 19, 2025" },
+  { id: 3, activity: "Michael updated client details", date: "Feb 18, 2025" },
+];
+
+const chartData = [
+  { name: "Jan", sales: 12000 },
+  { name: "Feb", sales: 18000 },
+  { name: "Mar", sales: 15000 },
+  { name: "Apr", sales: 22000 },
+  { name: "May", sales: 25000 },
+];
+
+export default function Dashboard() {
   return (
-    <div className="flex h-screen bg-gray-100 w-full">
-      {/* Main Content */}
-      <main className="flex-1 p-6">
-        {/* Navbar */}
-        <header className="flex justify-between items-center bg-white p-4 rounded shadow">
-          <h1 className="text-xl font-semibold">Admin Dashboard</h1>
-          <div className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border p-2 rounded"
-            />
-            <div className="bg-gray-200 p-2 rounded-full">👤</div>
-          </div>
-        </header>
+    <div className="p-6 grid gap-6 w-full h-full overflow-y-scroll">
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {stats.map((stat, index) => (
+          <Card key={index} className="p-6 shadow-lg border border-gray-200">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg font-semibold text-gray-700">
+                {stat.title}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold text-blue-600">{stat.value}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-        {/* Dashboard Stats */}
-        <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded shadow">
-            <p className="text-gray-500">Total Users</p>
-            <h2 className="text-2xl font-bold">1,200</h2>
-          </div>
-          <div className="bg-white p-6 rounded shadow">
-            <p className="text-gray-500">Revenue</p>
-            <h2 className="text-2xl font-bold">$45,000</h2>
-          </div>
-          <div className="bg-white p-6 rounded shadow">
-            <p className="text-gray-500">New Orders</p>
-            <h2 className="text-2xl font-bold">320</h2>
-          </div>
-          <div className="bg-white p-6 rounded shadow">
-            <p className="text-gray-500">Tickets</p>
-            <h2 className="text-2xl font-bold">87</h2>
-          </div>
-        </section>
+      {/* Sales Chart */}
+      <Card className="shadow-lg border border-gray-200">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold text-gray-700">
+            Sales Overview
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={chartData} className="mx-auto">
+              <XAxis dataKey="name" stroke="#64748b" />
+              <YAxis stroke="#64748b" />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "#fff",
+                  borderRadius: "6px",
+                  border: "1px solid #ddd",
+                }}
+              />
+              <Bar dataKey="sales" fill="#3b82f6" radius={[5, 5, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
-        {/* Recent Activity */}
-        <section className="mt-6 bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-          <ul className="space-y-3">
-            <li className="text-gray-600">✔ User John Doe signed up</li>
-            <li className="text-gray-600">✔ Order #1234 processed</li>
-            <li className="text-gray-600">✔ Payment received from client</li>
-            <li className="text-gray-600">✔ Support ticket closed</li>
-          </ul>
-        </section>
-      </main>
+      {/* Recent Activities */}
+      <Card className="shadow-lg border border-gray-200">
+        <CardHeader>
+          <CardTitle className="text-lg font-semibold text-gray-700">
+            Recent Activities
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table className="w-full border border-gray-200 rounded-lg overflow-hidden">
+            <TableHeader className="bg-gray-100">
+              <TableRow>
+                <TableHead className="text-gray-600">Activity</TableHead>
+                <TableHead className="text-gray-600">Date</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {recentActivities.map((activity) => (
+                <TableRow
+                  key={activity.id}
+                  className="hover:bg-gray-50 transition"
+                >
+                  <TableCell className="py-3 text-gray-700">
+                    {activity.activity}
+                  </TableCell>
+                  <TableCell className="py-3 text-gray-500">
+                    {activity.date}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-export default Dashboard;
+}

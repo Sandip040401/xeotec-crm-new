@@ -45,7 +45,7 @@ const Sidebar = () => {
           isOpen={isOpen}
         />
         <SidebarItem
-          to="/roles"
+          to="/admin/role"
           icon={<FaTasks />}
           label="Roles"
           isOpen={isOpen}
