@@ -11,6 +11,7 @@ import {
   FaUserGraduate,
   FaBars,
 } from "react-icons/fa";
+import { Link } from "react-router";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -25,23 +26,18 @@ const Sidebar = () => {
       </button>
       <nav className="flex flex-col space-y-4">
         <SidebarItem
-          to="/dashboard"
+          to="/admin"
           icon={<FaHome />}
           label="Dashboard"
           isOpen={isOpen}
         />
         <SidebarItem
-          to="/customers"
+          to="/admin/department"
           icon={<FaUsers />}
-          label="Customers"
+          label="Departments"
           isOpen={isOpen}
         />
-        <SidebarItem
-          to="/settings"
-          icon={<FaCog />}
-          label="Settings"
-          isOpen={isOpen}
-        />
+
         <SidebarItem
           to="/employee"
           icon={<FaUserTie />}
@@ -49,7 +45,7 @@ const Sidebar = () => {
           isOpen={isOpen}
         />
         <SidebarItem
-          to="/roles"
+          to="/admin/role"
           icon={<FaTasks />}
           label="Roles"
           isOpen={isOpen}
@@ -84,6 +80,12 @@ const Sidebar = () => {
           label="Internship"
           isOpen={isOpen}
         />
+        <SidebarItem
+          to="/settings"
+          icon={<FaCog />}
+          label="Settings"
+          isOpen={isOpen}
+        />
       </nav>
     </div>
   );
@@ -91,13 +93,13 @@ const Sidebar = () => {
 
 const SidebarItem = ({ to, icon, label, isOpen }) => {
   return (
-    <p
+    <Link
       to={to}
       className="flex items-center space-x-4 p-3 hover:bg-gray-700 rounded-md"
     >
       {icon}
       {isOpen && <span>{label}</span>}
-    </p>
+    </Link>
   );
 };
 
