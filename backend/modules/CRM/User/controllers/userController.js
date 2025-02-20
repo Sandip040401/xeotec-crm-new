@@ -2,8 +2,9 @@
 // we will take users directly from landing page login form
 // users will be all admin/employees etc.
 
-const User = require("../models/User.js");
+
 const bcrypt = require("bcryptjs");
+const User = require("../models/User");
 
 // company-user
 const createUser = async (req, res) => {
@@ -32,7 +33,23 @@ const createUser = async (req, res) => {
   }
 };
 
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json({
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
 //crm user
 module.exports = {
   createUser,
+  getUsers,
 };

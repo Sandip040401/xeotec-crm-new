@@ -4,7 +4,7 @@ const express = require("express");
 const { getSuperAdminProfile, updateSuperAdminProfile } = require("../controllers/superAdminControllers");
 const superAdminRouter = express.Router();
 
-superAdminRouter.get("/profile", getSuperAdminProfile);
-superAdminRouter.put("/profile", updateSuperAdminProfile);
+superAdminRouter.get("/superadmin/profile", getSuperAdminProfile);
+superAdminRouter.put("/superadmin/profile", updateSuperAdminProfile);
 
 module.exports = superAdminRouter;
