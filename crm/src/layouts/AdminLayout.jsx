@@ -1,11 +1,14 @@
-import React from "react";
+import { Outlet } from "react-router";
 import Sidebar from "../components/custom-components/Sidebar";
-import Dashboard from "../pages/admin/Dashboard";
 const AdminLayout = () => {
   return (
-    <div className="w-screen h-screen flex">
-      <Sidebar />
-      <Dashboard />
+    <div className="w-screen h-screen flex ">
+      <div className="w-[20%]">
+        <Sidebar />
+      </div>
+      <div className="w-[80%]">
+        <Outlet />
+      </div>
     </div>
   );
 };
