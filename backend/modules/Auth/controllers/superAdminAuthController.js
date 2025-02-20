@@ -1,10 +1,10 @@
 // Login with OTP for Super Admin
 
-const getMaskedEmail = require("../../../common/utils/maskEmail.js");
-const sendMail = require("../../CRM/Email/emailService.js");
-const emailTemplates = require("../../CRM/Email/emailTemplates.js");
-const SuperAdmin = require("../../SuperAdmin/models/SuperAdmin.js");
+const getMaskedEmail = require("../../../common/utils/maskEmail");
+const sendMail = require("../../CRM/Email/emailService");
+const emailTemplates = require("../../CRM/Email/emailTemplates");
 const bcrypt = require("bcryptjs");
+const SuperAdmin = require("../../SuperAdmin/models/SuperAdmin");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
