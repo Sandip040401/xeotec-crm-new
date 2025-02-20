@@ -4,10 +4,10 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const compression = require("compression");
-const errorHandler = require("./common/middlewares/errorHandler");
+const errorHandler = require("./common/middlewares/errorHandler.js");
 // const helmet = require("helmet");
-const indexRoutes = require("./routes/index");
-const connectDB = require("./common/config/db");
+const indexRoutes = require("./routes/index.js");
+const connectDB = require("./common/config/db.js");
 
 // Load environment configuration
 require("dotenv").config();
