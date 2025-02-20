@@ -1,7 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
-// import axios from "axios";
 
 const SuperAdminProfile = () => {
   const [admin, setAdmin] = useState({
@@ -20,14 +18,9 @@ const SuperAdminProfile = () => {
   }, []);
 
   return (
-    <div className="p-6">
-      <Card>
+    <div className="flex justify-center items-center min-h-full">
+      <Card className="w-full max-w-md">
         <CardHeader className="flex items-center space-x-4">
-          <Avatar
-            className="w-16 h-16"
-            src="/images/admin-avatar.png"
-            alt="Admin Avatar"
-          />
           <CardTitle>Super Admin Profile</CardTitle>
         </CardHeader>
         <CardContent>
