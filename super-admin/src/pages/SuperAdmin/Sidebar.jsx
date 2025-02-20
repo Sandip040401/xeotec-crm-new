@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Home, User, Settings } from "lucide-react";
-import { NavLink, Outlet } from "react-router-dom"; // Ensure Outlet is imported
+import { NavLink } from "react-router-dom";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -20,22 +21,19 @@ export const Sidebar = () => {
       label: "Dashboard",
       path: "/super-admin-dashboard",
     },
-    {
-      icon: <User size={24} />,
-      label: "Profile",
-      path: "profile",
-    },
-    { icon: <Settings size={24} />, label: "Settings", path: "/settings" },
+    { icon: <User size={24} />, label: "Profile", path: "profile" },
+    { icon: <Settings size={24} />, label: "Settings", path: "settings" },
   ];
 
   return (
     <div
       className={`fixed ${
         isMobile
-          ? "top-0 w-full flex justify-around p-2 bg-white shadow-md"
-          : "h-screen w-20 p-4"
+          ? "top-0 left-0 w-full flex justify-between p-2 shadow-md"
+          : "h-screen w-20 p-4 flex flex-col justify-between shadow-md"
       } transition-all`}
     >
+      {/* Navigation Links */}
       <nav className={`flex ${isMobile ? "flex-row gap-4" : "flex-col gap-4"}`}>
         {navItems.map((item, index) => (
           <NavLink
@@ -54,7 +52,11 @@ export const Sidebar = () => {
           </NavLink>
         ))}
       </nav>
+
+      {/* Mode Toggle */}
+      <div className={isMobile ? "ml-auto" : "mb-4"}>
+        <ModeToggle />
+      </div>
     </div>
   );
 };
-
