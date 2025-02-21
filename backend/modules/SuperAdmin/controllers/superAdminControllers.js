@@ -1,5 +1,9 @@
 const SuperAdmin = require("../models/SuperAdmin.js");
 const bcrypt = require("bcryptjs");
+const sendMail = require("../../CRM/Email/emailService.js");
+const emailTemplates = require("../../CRM/Email/emailTemplates.js");
+const getMaskedEmail = require("../../../common/utils/maskEmail.js");
+
 
 const createSuperAdmin = async (req, res) => {
   const { email, password, name } = req.body;
