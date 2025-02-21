@@ -19,19 +19,24 @@ connectDB();
 // app.use(helmet());
 app.use(compression());
 app.use(
-    cors({
-      origin: "http://localhost:5173", // Allow only your frontend
-      credentials: true, // Allow credentials (cookies, authentication headers)
-      methods: "GET,POST,PUT,DELETE,OPTIONS",
-      allowedHeaders: "Content-Type,Authorization",
-    })
-  );  
+  cors({
+    origin: "http://localhost:5173", // Allow only your frontend
+    credentials: true, // Allow credentials (cookies, authentication headers)
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
+  })
+);
 app.use(express.json());
 app.use(morgan("dev"));
 
-
 // Mount routes
 app.use("/api", indexRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Route not found");
+  error.statusCode = 404;
+  next(error);
+});
 
 // Global error handler
 app.use(errorHandler);
