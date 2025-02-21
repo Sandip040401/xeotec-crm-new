@@ -6,7 +6,7 @@ const {
   getCompanies,
 } = require("../controllers/companyManagementControllers");
 const validate = require("../../../../common/middlewares/validate");
-const companySchema = require("../validations/companySchema");
+const companySchema = require("../validations/companySchema.js");
 const {
   createDepartment,
   getDepartments,

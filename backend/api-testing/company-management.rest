@@ -1,9 +1,9 @@
-POST http://localhost:8000/api/company/company-management/create
+POST http://localhost:8000/api/company/create
 Content-Type: application/json
 
 {
     "name": "XEOTEC E-SERVICES PRIVATE LIMITED",
-    "domain": "https://crm.xeotec.in"
+    "domain": "https://ams.xeotec.in"
 
 }
 
