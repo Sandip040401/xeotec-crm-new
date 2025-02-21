@@ -1,0 +1,24 @@
+### create a role
+POST http://localhost:8000/api/roles/create
+Content-Type: application/json
+
+{
+    "name": "HR",
+    "description": "Human Resource",
+    "companyId": "67b70814423934916b53f80d"
+}
+
+### get all roles
+GET http://localhost:8000/api/roles
+
+### get role by id
+GET http://localhost:8000/api/roles/67b8d43db120a776a778d175
+
+### assign permission to role
+POST http://localhost:8000/api/roles/assign-permission
+Content-Type: application/json
+
+{
+    "roleId": "67b8d43db120a776a778d175",
+    "permissionId": "67b8d1f8341578af58754744"
+}

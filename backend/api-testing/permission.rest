@@ -1,0 +1,14 @@
+### create a permission
+POST http://localhost:8000/api/permission/create
+Content-Type: application/json
+
+{
+    "name": "user:user:view",
+    "module": "user",
+    "resource": "user",
+    "action": "create",
+    "description": "Permission to create a user"
+}
+
+### get all permissions
+GET http://localhost:8000/api/permission

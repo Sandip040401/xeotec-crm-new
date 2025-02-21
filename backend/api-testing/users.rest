@@ -1,5 +1,26 @@
-###
+### Get all users
 GET http://localhost:8000/api/users/user
 
-###
-POST http://localhost:8000/api/users/user
+### Create a user
+POST http://localhost:8000/api/users/user/create
+Content-Type: application/json
+
+{
+    "email": "anupam@xeotec.in",
+    "password": "aksinghweb",
+    "name": "anupam singh",
+    "userType": "admin",
+    "companyId": "67b70814423934916b53f80d"
+}
+
+### Assign role to a user
+POST http://localhost:8000/api/users/user/assign-role
+Content-Type: application/json
+
+{
+    "userId": "67b8c87c0e5dc51df9bd96f1",
+    "roleId": "67b8d43db120a776a778d175"
+}
+
+### Get all permissions
+GET http://localhost:8000/api/users/user/permissions
