@@ -2,12 +2,12 @@ import api from "./api";
 
 const authService = {
   register: async (userData) => {
-    const response = await api.post("/api/user/register", userData);
+    const response = await api.post("/api/landing/superadmin/register", userData);
     return response;
   },
 
   login: async (credentials) => {
-    const response = await api.post("/api/user/login", credentials);
+    const response = await api.post("/api/landing/superadmin/login", credentials);
     return response;
   },
 

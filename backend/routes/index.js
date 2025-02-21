@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.use("/auth", authRouter);
 router.use("/company", companyRouter);
-router.use("/users", superAdminRouter);
+router.use("/landing", superAdminRouter);
 router.use("/users", userRouter);
 
 module.exports = router;

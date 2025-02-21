@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,8 +10,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useNavigate } from "react-router-dom";
+import authService from "@/services/authService.js";
+
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    setError(""); // Clear previous errors
+    try {
+      const response = await authService.login({ email, password });
+
+      if (response.status === 200) {
+        navigate("/dashboard"); // Redirect on success
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Login failed. Try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <Card className="w-full max-w-md p-6 shadow-lg">
@@ -23,7 +43,13 @@ const Login = () => {
           <div className="space-y-4">
             <div>
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="Enter your email" />
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div>
               <Label htmlFor="password">Password</Label>
@@ -31,23 +57,17 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col items-center">
-          <Button className="w-full" onClick={() => navigate("/dashboard")}>
+          <Button className="w-full" onClick={handleLogin}>
             Login
           </Button>
-          {/* <p className="mt-2 text-sm text-gray-600">
-            Don&apos;t have an account?{" "}
-            <span
-              className="text-blue-600 cursor-pointer"
-              onClick={() => navigate("/super-admin-signup")}
-            >
-              Sign up
-            </span>
-          </p> */}
         </CardFooter>
       </Card>
     </div>

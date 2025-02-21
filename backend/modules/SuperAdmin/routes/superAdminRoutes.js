@@ -5,8 +5,8 @@ const { getSuperAdminProfile, updateSuperAdminProfile, superAdminLogin, createSu
 const superAdminRouter = express.Router();
 
 
-superAdminRouter.post("/login", superAdminLogin);
-superAdminRouter.post("/register", createSuperAdmin);
+superAdminRouter.post("/superadmin/login", superAdminLogin);
+superAdminRouter.post("/superadmin/register", createSuperAdmin);
 superAdminRouter.get("/superadmin/profile", getSuperAdminProfile);
 superAdminRouter.put("/superadmin/profile", updateSuperAdminProfile);
 

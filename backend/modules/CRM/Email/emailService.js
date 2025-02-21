@@ -1,4 +1,4 @@
-const { transporter } = require("../../../common/config/mailer");
+const { transporter } = require('../../../common/config/mailer.js');
 
 const sendMail = async ({ to, cc, bcc, subject, templateData }) => {
   try {
