@@ -19,12 +19,12 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    setError(""); // Clear previous errors
+    setError("");
     try {
       const response = await authService.login({ email, password });
 
       if (response.status === 200) {
-        navigate("/dashboard"); // Redirect on success
+        navigate("/super-admin-dashboard");
       }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed. Try again.");
@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <Card className="w-full max-w-md p-6 shadow-lg">
         <CardHeader>
           <CardTitle className="text-center text-2xl">
