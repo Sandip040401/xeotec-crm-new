@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
     departments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Department" }],
     position: { type: String },
     manager: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    joiningDate: { type: Date, required: true },
+    joiningDate: { type: Date },
     terminationDate: { type: Date },
     employmentStatus: {
       type: String,

@@ -7,3 +7,6 @@ Content-Type: application/json
     "description": "Human Resource Department",
     "company": "67b70814423934916b53f80d"
 }
+
+###
+GET http://localhost:8000/api/company/department
