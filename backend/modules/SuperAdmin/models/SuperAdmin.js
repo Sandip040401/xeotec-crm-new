@@ -17,7 +17,7 @@ const SuperAdminSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    role: {
+    userType: {
       type: String,
       default: "superadmin",
     },

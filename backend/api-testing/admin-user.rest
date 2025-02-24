@@ -9,3 +9,4 @@ Content-Type: application/json
 
 ### Get all admins
 GET http://localhost:8000/api/users/admin
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjMxNTI4Nzg2MDVkNjdlNTE3OGRmZCIsImVtYWlsIjoiYW51cGFtQG5hZ2Fkd2FsbGV0Lm5ldCIsInVzZXJUeXBlIjoic3VwZXJhZG1pbiIsImlhdCI6MTc0MDM4NjI5NiwiZXhwIjoxNzQwMzk3MDk2fQ.dRevYDW9uXzJGfpj5nTjNHALNLmCtwraV6eDwJOaLLk

@@ -13,6 +13,15 @@ POST http://localhost:8000/api/auth/superadmin/login
 Content-Type: application/json
 
 {
-    "email": "sidsingh0121@gmail.com",
+    "email": "anupam@nagadwallet.net",
     "password": "Xeotec@2018#"
+}
+
+### Verify OTP for Super Admin Login
+POST http://localhost:8000/api/auth/superadmin/login/verify-otp
+Content-Type: application/json
+
+{
+    "otp": "992420",
+    "email": "anupam@nagadwallet.net"
 }

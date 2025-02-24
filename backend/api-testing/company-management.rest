@@ -1,11 +1,13 @@
 POST http://localhost:8000/api/company/create
+Authorization: Bearer eyJhbGciOiJIUk1NiIsInR5cCI6IkpXVCJ9.eyJpZCI5IjY3YjMxNTI4Nzg2MDVkNjdlNTE3OGRmZCIsImVtYWlsIjoiYW51cGFtQG5hZ2Fkd2FsbGV0Lm5ldCIsInVzZXJUeXBlIjoic3VwZXJhZG1pbiIsImlhdCI6MTc0MDM4NjI5NiwiZXhwIjoxNzQwMzk3MDk2fQ.dRepYDW9uXzJGfpj5nTjNHALNLmCtwraV6eDwJOaLLk
 Content-Type: application/json
 
 {
     "name": "XEOTEC E-SERVICES PRIVATE LIMITED",
-    "domain": "https://ams.xeotec.in"
+    "domain": "https://erp.xeotec.in"
 
 }
 
 ###
 GET http://localhost:8000/api/company
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjMxNTI4Nzg2MDVkNjdlNTE3OGRmZCIsImVtYWlsIjoiYW51cGFtQG5hZ2Fkd2FsbGV0Lm5ldCIsInVzZXJUeXBlIjoic3VwZXJhZG1pbiIsImlhdCI6MTc0MDM4NjI5NiwiZXhwIjoxNzQwMzk3MDk2fQ.dRevYDW9uXzJGfpj5nTjNHALNLmCtwraV6eDwJOaLLk

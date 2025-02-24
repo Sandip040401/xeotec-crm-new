@@ -6,7 +6,7 @@ const SuperAdmin = require("../../modules/SuperAdmin/models/SuperAdmin");
 const verifyToken = async (req, res, next) => {
   // Check for the token in the Authorization header
   const token =
-    req.cookies.authToken ||
+    req?.cookies?.authToken ||
     req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
@@ -23,7 +23,7 @@ const verifyToken = async (req, res, next) => {
 
     // Find the user in the database using the decoded user ID
 
-    if (decoded.role === "superadmin") {
+    if (decoded.userType === "superadmin") {
       const user = await SuperAdmin.findById(decoded.id);
 
       if (!user) {
@@ -33,7 +33,7 @@ const verifyToken = async (req, res, next) => {
       req.user = user;
       // Proceed to the next middleware or route handler
       next();
-    } else if (decoded.role === "admin") {
+    } else if (decoded.userType === "admin") {
       const user = await AdminUser.findById(decoded.id);
 
       if (!user) {

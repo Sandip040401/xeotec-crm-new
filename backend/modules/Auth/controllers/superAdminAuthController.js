@@ -1,9 +1,9 @@
 // Login with OTP for Super Admin
-
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const getMaskedEmail = require("../../../common/utils/maskEmail");
 const sendMail = require("../../CRM/Email/emailService");
 const emailTemplates = require("../../CRM/Email/emailTemplates");
-const bcrypt = require("bcryptjs");
 const SuperAdmin = require("../../SuperAdmin/models/SuperAdmin");
 
 const login = async (req, res) => {
@@ -61,6 +61,78 @@ const login = async (req, res) => {
   }
 };
 
+const verifyOtp = async (req, res) => {
+  const { email, otp } = req.body;
+
+  try {
+    const user = await SuperAdmin.findOne({
+      email,
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: "Invalid credentials",
+      });
+    }
+
+    if (user.otp !== parseInt(otp)) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid OTP",
+      });
+    }
+
+    if (user.otpExpires < Date.now()) {
+      return res.status(400).json({
+        success: false,
+        error: "OTP expired",
+      });
+    }
+
+    user.otp = undefined;
+    user.otpExpires = undefined;
+
+    await user.save();
+
+    // Generate jwt token
+    const token = jwt.sign(
+      {
+        id: user._id,
+        email: user.email,
+        userType: user.userType,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "3h",
+      }
+    );
+
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Authentication successful",
+      data: {
+        user: {
+          name: user.name,
+          email: getMaskedEmail(user.email),
+          userType: user.userType,
+        },
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
 module.exports = {
   login,
+  verifyOtp,
 };

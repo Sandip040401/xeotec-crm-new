@@ -1,9 +1,9 @@
 const verifySuperAdmin = (req, res, next) => {
   // Check if the user is a super admin
-  if (req.user.role !== "superadmin") {
+  if (req.user.userType !== "superadmin") {
     return res.status(403).json({
       success: false,
-      error: "You are not authorized to access this route",
+      message: "Unauthorized access",
     });
   }
 
