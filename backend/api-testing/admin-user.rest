@@ -1,0 +1,11 @@
+POST http://localhost:8000/api/users/admin/create
+Content-Type: application/json
+
+{
+    "email": "aksingh2486@gmail.com",
+    "name": "anupam singh",
+    "companyId": "67b70814423934916b53f80d"
+}
+
+### Get all admins
+GET http://localhost:8000/api/users/admin

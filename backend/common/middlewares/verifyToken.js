@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/user/user");
-const SuperAdmin = require("../../modules/User/models/SuperAdmin");
+const User = require("../../modules/CRM/User/models/User");
+const AdminUser = require("../../modules/CRM/User/models/AdminUser");
+const SuperAdmin = require("../../modules/SuperAdmin/models/SuperAdmin");
 
 const verifyToken = async (req, res, next) => {
   // Check for the token in the Authorization header
@@ -32,8 +33,21 @@ const verifyToken = async (req, res, next) => {
       req.user = user;
       // Proceed to the next middleware or route handler
       next();
+    } else if (decoded.role === "admin") {
+      const user = await AdminUser.findById(decoded.id);
+
+      if (!user) {
+        return res.status(401).json({ message: "User not found" });
+      }
+
+      req.user = user;
+
+      // Proceed to the next middleware or route handler
+      next();
     } else {
-      const user = await User.findById(decoded.id);
+      const user = await User.findById(decoded.id)
+        .populate("roles")
+        .populate("customPermissions.permissionId");
 
       if (!user) {
         return res.status(401).json({ message: "User not found" });

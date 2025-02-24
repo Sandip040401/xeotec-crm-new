@@ -1,0 +1,223 @@
+paths:
+  /api/users/admin/create:
+    post:
+      summary: Create a new Admin User
+      description: |
+        Registers a new admin user with a hashed password.
+        - **Requires Authentication:** Bearer Token or HTTP-only Cookie
+        - Only accessible by **Super Admin** roles.
+      tags:
+        - Company Admin Users
+      security:
+        - { type: apiKey, in: cookie, name: authToken }
+        - { type: http, scheme: bearer, bearerFormat: JWT }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - companyId
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                  example: "John Doe"
+                email:
+                  type: string
+                  format: email
+                  example: "admin@example.com"
+                companyId:
+                  type: string
+                  format: uuid
+                  example: "5f47f1a5b6d7c000171fa69d"
+                isActive:
+                  type: boolean
+                  default: true
+                allowLogin:
+                  type: boolean
+                  default: true
+      responses:
+        '201':
+          description: Admin user created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: "5f47f1a5b6d7c000171fa69d"
+                  name:
+                    type: string
+                    example: "John Doe"
+                  email:
+                    type: string
+                    example: "admin@example.com"
+                  companyId:
+                    type: string
+                    format: uuid
+                    example: "5f47f1a5b6d7c000171fa69d"
+                  isActive:
+                    type: boolean
+                    example: true
+                  allowLogin:
+                    type: boolean
+                    example: true
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+        '400':
+          description: Bad request (Validation error, duplicate email)
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Internal server error
+
+  /api/admin-users/{id}:
+    get:
+      summary: Get Admin User by ID
+      description: |
+        Fetch a specific admin user using their ID.
+        - **Requires Authentication:** Bearer Token or HTTP-only Cookie
+      tags:
+        - Admin Users
+      security:
+        - { type: apiKey, in: cookie, name: jwt }
+        - { type: http, scheme: bearer, bearerFormat: JWT }
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Admin user details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                    example: "5f47f1a5b6d7c000171fa69d"
+                  name:
+                    type: string
+                    example: "John Doe"
+                  email:
+                    type: string
+                    example: "admin@example.com"
+                  companyId:
+                    type: string
+                    format: uuid
+                    example: "5f47f1a5b6d7c000171fa69d"
+                  isActive:
+                    type: boolean
+                    example: true
+                  allowLogin:
+                    type: boolean
+                    example: true
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+        '404':
+          description: Admin user not found
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Internal server error
+
+    put:
+      summary: Update Admin User
+      description: |
+        Updates an existing admin user.
+        - **Requires Authentication:** Bearer Token or HTTP-only Cookie
+      tags:
+        - Admin Users
+      security:
+        - { type: apiKey, in: cookie, name: jwt }
+        - { type: http, scheme: bearer, bearerFormat: JWT }
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                companyId:
+                  type: string
+                  format: uuid
+                isActive:
+                  type: boolean
+                allowLogin:
+                  type: boolean
+      responses:
+        '200':
+          description: Admin user updated successfully
+        '400':
+          description: Bad request (Validation error)
+        '404':
+          description: Admin user not found
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Internal server error
+
+    delete:
+      summary: Delete Admin User
+      description: |
+        Removes an admin user from the system.
+        - **Requires Authentication:** Bearer Token or HTTP-only Cookie
+      tags:
+        - Admin Users
+      security:
+        - { type: apiKey, in: cookie, name: jwt }
+        - { type: http, scheme: bearer, bearerFormat: JWT }
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Admin user deleted successfully
+        '404':
+          description: Admin user not found
+        '401':
+          description: Unauthorized access
+        '500':
+          description: Internal server error

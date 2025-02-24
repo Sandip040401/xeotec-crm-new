@@ -14,14 +14,16 @@ const {
 const departmentSchema = require("../validations/departmentValidation");
 const companyRouter = express.Router();
 
-
 // routes for company management
 companyRouter.post("/create", validate(companySchema), createCompany);
 companyRouter.get("/", getCompanies);
 
-
 // routes for department management
-companyRouter.post("/department/create",validate(departmentSchema), createDepartment);
+companyRouter.post(
+  "/department/create",
+  validate(departmentSchema),
+  createDepartment
+);
 companyRouter.get("/department", getDepartments);
 
 module.exports = companyRouter;

@@ -4,10 +4,12 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const compression = require("compression");
+const expressRateLimit = require("express-rate-limit");
 const errorHandler = require("./common/middlewares/errorHandler.js");
 // const helmet = require("helmet");
 const indexRoutes = require("./routes/index.js");
 const connectDB = require("./common/config/db.js");
+const { swaggerUi, specs, customCss } = require("./swagger.js");
 
 // Load environment configuration
 require("dotenv").config();
@@ -28,9 +30,24 @@ app.use(
 );
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(
+  expressRateLimit({
+    windowMs: process.env.NODE_ENV === "production" ? 15 * 60 * 1000 : 0, // 15 minutes
+    max: 100, // limit each IP to 100 requests
+  })
+);
 
 // Mount routes
 app.use("/api", indexRoutes);
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, {
+    customCss,
+    customSiteTitle: "Xeotec CRM API Docs",
+  })
+);
 
 app.use((req, res, next) => {
   const error = new Error("Route not found");

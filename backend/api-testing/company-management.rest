@@ -8,4 +8,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/api/company/company-management
+GET http://localhost:8000/api/company
