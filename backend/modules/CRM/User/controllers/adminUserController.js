@@ -42,15 +42,11 @@ exports.createAdminUser = async (req, res) => {
     await newAdmin.save();
     await company.save();
 
-    console.log("New Admin User:", newAdmin.name, newAdmin.email, password);
-
     const emailTemplate = userGenerationTemplate.adminCreation(
       newAdmin.name,
       newAdmin.email,
       password
     );
-
-    console.log("Email Template:", emailTemplate);
 
     sendMail({
       to: newAdmin.email,

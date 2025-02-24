@@ -25,3 +25,7 @@ Content-Type: application/json
     "otp": "992420",
     "email": "anupam@nagadwallet.net"
 }
+
+### Logout as Super Admin
+POST http://localhost:8000/api/auth/superadmin/logout
+
