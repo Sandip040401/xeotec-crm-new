@@ -12,11 +12,19 @@ const {
   getDepartments,
 } = require("../controllers/departmentContorllers");
 const departmentSchema = require("../validations/departmentValidation");
+const verifyToken = require("../../../../common/middlewares/verifyToken.js");
+const verifySuperAdmin = require("../../../../common/middlewares/verifySuperAdmin.js");
 const companyRouter = express.Router();
 
 // routes for company management
-companyRouter.post("/create", validate(companySchema), createCompany);
-companyRouter.get("/", getCompanies);
+companyRouter.post(
+  "/create",
+  validate(companySchema),
+  verifyToken,
+  verifySuperAdmin,
+  createCompany
+);
+companyRouter.get("/", verifyToken, verifySuperAdmin, getCompanies);
 
 // routes for department management
 companyRouter.post(
