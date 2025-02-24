@@ -25,3 +25,7 @@ Content-Type: application/json
     "otp": "776181",
     "email": "shamimimran35@gmail.com"
 }
+
+### Logout as Super Admin
+POST http://localhost:8000/api/auth/superadmin/logout
+
