@@ -1,0 +1,89 @@
+paths:
+  /api/auth/user/login:
+    post:
+      summary: Authenticate user and obtain JWT tokens (Cookie-based and Authorization Header)
+      description: |
+        Authenticates user credentials and returns JWT tokens.
+        - Sets an HTTP-only cookie with the JWT (use for browser-based auth)
+        - Returns Bearer token in response body (use for mobile/API clients)
+        
+        **Security Requirements:**
+        - Email must be verified
+        - Account must not be locked
+        
+        **Rate Limits:** 5 attempts per 15 minutes
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: Registered email address
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  description: Minimum 8 characters
+                  example: Str0ngP@ss
+      responses:
+        200:
+          description: Successful authentication
+          headers:
+            Set-Cookie:
+              schema: 
+                type: string
+                example: authToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....; Path=/; HttpOnly; Secure; SameSite=Strict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Authentication successful"
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: John Doe
+                      email:
+                        type: string
+                        example: abc@example.com
+                      role:
+                        type: string
+                        example: user | admin
+        400:
+          description: Validation error
+          content:
+            application/json:
+              example:
+                error: "Invalid email format"
+        401:
+          description: Authentication failure
+          content:
+            application/json:
+              example:
+                error: "Invalid credentials"
+        429:
+          description: Too many failed attempts
+          content:
+            application/json:
+              example:
+                error: "Account temporarily locked - try again in 15 minutes"
+        500:
+          description: Internal server error
+      security: []

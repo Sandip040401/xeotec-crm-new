@@ -14,5 +14,4 @@ userRouter.get("/user", getUsers);
 userRouter.post("/user/assign-role", assignRole);
 userRouter.get("/user/permissions", getUserPermissions);
 
-
 module.exports = userRouter;

@@ -42,15 +42,21 @@ const login = async (req, res) => {
       }
     );
 
-    // send token in response
-    return res.status(200).json({
+    // set cookie
+    res.cookie("authToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+    });
+
+    res.status(200).json({
       success: true,
-      token,
-      user: {
-        id: user._id,
-        email: getMaskedEmail(user.email),
-        name: user.name,
-        userType: user.userType,
+      message: "Authentication successful",
+      data: {
+        user: {
+          name: user.name,
+          email: getMaskedEmail(user.email),
+          userType: user.userType,
+        },
       },
     });
   } catch (error) {
