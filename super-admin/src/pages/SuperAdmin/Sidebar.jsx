@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Home, User, Settings } from "lucide-react";
+import { Home, User, Settings, LogOut } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useNavigate } from "react-router-dom";
+import authService from "@/services/authService.js";
 
 export const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -13,6 +15,22 @@ export const Sidebar = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await authService.Slogout();
+
+      if (!response || response.status !== 200) {
+        throw new Error(response?.data?.message || "Logout failed");
+      }
+      sessionStorage.clear();
+
+      navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   // Define navigation routes
   const navItems = [
@@ -55,6 +73,14 @@ export const Sidebar = () => {
 
       {/* Mode Toggle */}
       <div className={isMobile ? "ml-auto" : "mb-4"}>
+        <Button
+          variant="outline"
+          className="mb-3 hover:bg-red-600"
+          size="icon"
+          onClick={handleLogout}
+        >
+          <LogOut />
+        </Button>
         <ModeToggle />
       </div>
     </div>
