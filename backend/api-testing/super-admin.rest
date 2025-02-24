@@ -13,7 +13,7 @@ POST http://localhost:8000/api/auth/superadmin/login
 Content-Type: application/json
 
 {
-    "email": "anupam@nagadwallet.net",
+    "email": "shamimimran35@gmail.com",
     "password": "Xeotec@2018#"
 }
 
@@ -22,6 +22,6 @@ POST http://localhost:8000/api/auth/superadmin/login/verify-otp
 Content-Type: application/json
 
 {
-    "otp": "992420",
-    "email": "anupam@nagadwallet.net"
+    "otp": "776181",
+    "email": "shamimimran35@gmail.com"
 }
