@@ -34,7 +34,7 @@ const LandingPage = () => {
           <Card key={index} className="p-6">
             <CardContent className="flex items-center space-x-3">
               <CheckCircle className="text-green-500" />
-              <p className="text-gray-800 font-medium">{feature}</p>
+              <p className="font-medium">{feature}</p>
             </CardContent>
           </Card>
         ))}
