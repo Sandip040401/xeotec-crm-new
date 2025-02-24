@@ -20,6 +20,14 @@ const authService = {
   logout: async () => {
     await api.post("/api/user/logout");
   },
+  Slogout: async () => {
+    return await api.post("/api/auth/superadmin/logout", {
+      withCredentials: true, // Ensures cookies are included
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  },
 
   getProfile: async () => {
     const response = await api.get("/api/user/profile");
