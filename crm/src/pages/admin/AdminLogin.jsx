@@ -9,10 +9,13 @@ import { Label } from "@/components/ui/label";
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [formData, setFormData] = useState({
+    email: email,
+    password: password,
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Admin logging in with", { email, password });
+    console.log("Employee logging in ded", { email, password });
   };
 
   return (

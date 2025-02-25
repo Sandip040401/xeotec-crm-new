@@ -9,10 +9,13 @@ import { Label } from "@/components/ui/label";
 export default function UserLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [formData, setFormData] = useState({
+    email: email,
+    password: password,
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Employee logging in with", { email, password });
+    console.log("Employee logging in ded", { email, password });
   };
 
   return (
@@ -33,7 +36,7 @@ export default function UserLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter employee email"
+                placeholder="Enter user email"
                 required
               />
             </div>
@@ -44,7 +47,7 @@ export default function UserLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter employee password"
+                placeholder="Enter user password"
                 required
               />
             </div>
