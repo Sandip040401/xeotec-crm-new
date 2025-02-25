@@ -14,6 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { FaUser } from "react-icons/fa";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -22,7 +23,7 @@ const Sidebar = () => {
   return (
     <Card
       className={cn(
-        "h-full text-sm bg-slate-900 text-white shadow-xl flex flex-col p-4 rounded-r-md transition-all duration-300",
+        "h-full text-sm bg-slate-900 text-white shadow-xl flex flex-col p-4 rounded-r-sm transition-all duration-300",
         isOpen ? "w-64" : "w-20"
       )}
     >
@@ -63,8 +64,8 @@ const Sidebar = () => {
           active={location.pathname === "/admin/department"}
         />
         <SidebarItem
-          to="/employee"
-          icon={<UserTie className="text-green-400" />}
+          to="/admin/employee"
+          icon={<FaUser className="text-green-400" />}
           label="Employee"
           isOpen={isOpen}
           active={location.pathname === "/employee"}
@@ -91,7 +92,7 @@ const Sidebar = () => {
           active={location.pathname === "/customer"}
         />
         <SidebarItem
-          to="/project"
+          to="/admin/project"
           icon={<FolderKanban className="text-teal-400" />}
           label="Project"
           isOpen={isOpen}
@@ -112,7 +113,7 @@ const Sidebar = () => {
           active={location.pathname === "/internship"}
         />
         <SidebarItem
-          to="/settings"
+          to="/admin/setting"
           icon={<Settings className="text-gray-400" />}
           label="Settings"
           isOpen={isOpen}
@@ -121,19 +122,23 @@ const Sidebar = () => {
       </nav>
 
       {/* User Profile */}
-      <div className="mt-auto bg-white/10 p-3 w-full rounded-lg flex items-center space-x-3 shadow-md backdrop-blur-md hover:bg-white/20 transition duration-300">
-        <img
-          src="https://cdn-icons-png.freepik.com/512/9703/9703596.png"
-          alt="User"
-          className="w-10 h-10 rounded-full border-2 border-white object-contain"
-        />
-        {isOpen && (
-          <div className="flex flex-col">
-            <p className="text-sm font-semibold text-white">Xeotec</p>
-            <p className="text-xs text-gray-300">Admin</p>
-          </div>
-        )}
-      </div>
+      <Link to={`/admin/profile`} className="flex items-center space-x-2">
+        {" "}
+        <div className="mt-auto bg-white/10 p-3 w-full rounded-lg flex items-center space-x-3 shadow-md backdrop-blur-md hover:bg-white/20 transition duration-300">
+          <img
+            src="https://cdn-icons-png.freepik.com/512/9703/9703596.png"
+            alt="User"
+            className="w-10 h-10 rounded-full border-2 border-white object-contain"
+          />
+
+          {isOpen && (
+            <div className="flex flex-col">
+              <p className="text-sm font-semibold text-white">Xeotec</p>
+              <p className="text-xs text-gray-300">Admin</p>
+            </div>
+          )}
+        </div>{" "}
+      </Link>
     </Card>
   );
 };
