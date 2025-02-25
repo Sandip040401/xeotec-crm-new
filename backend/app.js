@@ -10,6 +10,8 @@ const errorHandler = require("./common/middlewares/errorHandler.js");
 const indexRoutes = require("./routes/index.js");
 const connectDB = require("./common/config/db.js");
 const { swaggerUi, specs, customCss } = require("./swagger.js");
+//import cookieParser from "cookie-parser";
+const cookieParser = require("cookie-parser");
 
 // Load environment configuration
 require("dotenv").config();
@@ -29,6 +31,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(
   expressRateLimit({
