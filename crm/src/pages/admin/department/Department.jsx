@@ -10,7 +10,18 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Trash } from "lucide-react";
+import { Trash, Edit } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import EditDepartment from "./EditDepartment";
 
 const dummyData = [
   {
@@ -36,6 +47,8 @@ const dummyData = [
 const Department = () => {
   const [departments, setDepartments] = useState([]);
   const [newDept, setNewDept] = useState("");
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [editDept, setEditDept] = useState(null);
 
   useEffect(() => {
     setDepartments(dummyData);
@@ -51,6 +64,7 @@ const Department = () => {
       };
       setDepartments([...departments, newDepartment]);
       setNewDept("");
+      setDialogOpen(false);
     }
   };
 
@@ -58,19 +72,51 @@ const Department = () => {
     setDepartments(departments.filter((dept) => dept._id !== id));
   };
 
+  const editDepartment = (dept) => {
+    setEditDept(dept);
+    setDialogOpen(true);
+  };
+
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Departments</h1>
       <Card>
         <CardContent className="p-4">
-          <div className="flex gap-2 mb-4">
-            <Input
-              placeholder="Add new department"
-              value={newDept}
-              onChange={(e) => setNewDept(e.target.value)}
-            />
-            <Button onClick={addDepartment}>Add</Button>
-          </div>
+          <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <DialogTrigger asChild>
+              <Button>Add Department</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>
+                  {editDept ? "Edit Department" : "Add New Department"}
+                </DialogTitle>
+                <DialogDescription>
+                  {editDept
+                    ? "Modify department details."
+                    : "Enter the details of the new department."}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="name" className="text-right">
+                    Name
+                  </Label>
+                  <Input
+                    id="name"
+                    value={editDept ? editDept.name : newDept}
+                    onChange={(e) => setNewDept(e.target.value)}
+                    className="col-span-3"
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button onClick={addDepartment}>
+                  {editDept ? "Save Changes" : "Save"}
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
           <Table>
             <TableHeader>
               <TableRow>
@@ -91,7 +137,14 @@ const Department = () => {
                     {dept.employees?.map((emp) => emp.name).join(", ") ||
                       "None"}
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => editDepartment(dept)}
+                    >
+                      <Edit size={16} />
+                    </Button>
                     <Button
                       variant="destructive"
                       size="sm"
