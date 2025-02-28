@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const EmployeeOnboarding = () => {
@@ -114,15 +115,9 @@ const EmployeeOnboarding = () => {
                 <h2 className="text-xl font-bold">
                   Create Offer Letter (HR View)
                 </h2>
-                <button
-                  onClick={toggleView}
-                  className="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded-md"
-                >
-                  Preview Employee View
-                </button>
               </div>
 
-              <div className="space-y-4 bg-white p-4 rounded-md border">
+              <div className="space-y-4 p-4 rounded-md border">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium mb-1">
@@ -243,7 +238,7 @@ const EmployeeOnboarding = () => {
                 </div>
 
                 <div className="mt-4">
-                  <button
+                  <Button
                     onClick={sendOfferToEmployee}
                     disabled={!offerLetterPdf}
                     className={`px-4 py-2 rounded-md ${
@@ -253,7 +248,7 @@ const EmployeeOnboarding = () => {
                     }`}
                   >
                     Send Offer to Employee
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -265,22 +260,22 @@ const EmployeeOnboarding = () => {
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-bold">Offer Letter</h2>
                 {!userData.offerAccepted && (
-                  <button
+                  <Button
                     onClick={toggleView}
                     className="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded-md"
                   >
                     Switch to HR View
-                  </button>
+                  </Button>
                 )}
               </div>
 
-              <div className="p-4 border rounded-md bg-white">
+              <div className="p-4 border rounded-md">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="font-bold">
                       Offer Letter for {userData.name || "[Candidate Name]"}
                     </h3>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm ">
                       Position: {userData.position || "[Position]"}
                     </p>
                   </div>
@@ -313,7 +308,7 @@ const EmployeeOnboarding = () => {
                 </div>
 
                 {offerLetterPdf ? (
-                  <div className="border p-8 rounded bg-gray-50 flex flex-col items-center justify-center">
+                  <div className="border p-8 rounded flex flex-col items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-16 w-16 text-red-600 mb-2"
@@ -365,7 +360,7 @@ const EmployeeOnboarding = () => {
           <div className="space-y-4">
             <h2 className="text-xl font-bold">Non-Disclosure Agreement</h2>
 
-            <div className="p-4 border rounded-md bg-white">
+            <div className="p-4 border rounded-md">
               <div className="flex justify-between items-start mb-4">
                 <h3 className="font-bold">Non-Disclosure Agreement</h3>
                 {ndaPdf && (
@@ -436,7 +431,7 @@ const EmployeeOnboarding = () => {
                     )}
                   </div>
                   <div className="mt-4">
-                    <button
+                    <Button
                       onClick={() => {
                         setIsHRView(false);
                         alert("NDA sent to employee for signing");
@@ -449,7 +444,7 @@ const EmployeeOnboarding = () => {
                       }`}
                     >
                       Send NDA to Employee
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ) : (
@@ -474,7 +469,7 @@ const EmployeeOnboarding = () => {
                       <p className="text-sm text-gray-500 mt-1">PDF Document</p>
                     </div>
                   ) : (
-                    <div className="text-center p-8 bg-gray-100 rounded mb-6">
+                    <div className="text-center p-8 rounded mb-6">
                       <p className="text-gray-500">No NDA document available</p>
                     </div>
                   )}
@@ -498,7 +493,7 @@ const EmployeeOnboarding = () => {
                             className="w-full p-2 border rounded-md"
                           />
                         </div>
-                        <button
+                        <Button
                           onClick={saveSignature}
                           disabled={!signatureData.trim()}
                           className={`px-4 py-2 rounded-md ${
@@ -508,11 +503,11 @@ const EmployeeOnboarding = () => {
                           }`}
                         >
                           Sign Document
-                        </button>
+                        </Button>
                       </div>
                     ) : (
                       <div className="mt-2">
-                        <div className="border rounded-md p-4 bg-gray-50">
+                        <div className="border rounded-md p-4">
                           <p className="font-italic text-gray-700 mb-1">
                             Signed by:
                           </p>
@@ -524,14 +519,14 @@ const EmployeeOnboarding = () => {
                           </p>
                         </div>
                         <div className="mt-4">
-                          <button
+                          <Button
                             onClick={() =>
                               setUserData({ ...userData, ndaSigned: true })
                             }
                             className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md"
                           >
                             Confirm and Submit Signed NDA
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     )}
@@ -546,7 +541,7 @@ const EmployeeOnboarding = () => {
         return (
           <div className="space-y-4">
             <h2 className="text-xl font-bold">Joining Letter</h2>
-            <div className="p-4 border rounded-md bg-white">
+            <div className="p-4 border rounded-md">
               <div className="mb-6">
                 <h3 className="font-bold text-lg mb-2">Joining Letter</h3>
                 <p className="mb-4">Dear {userData.name},</p>
@@ -624,7 +619,7 @@ const EmployeeOnboarding = () => {
               {userData.name}, all your documents have been successfully
               submitted.
             </p>
-            <div className="p-4 border rounded-md bg-white text-left">
+            <div className="p-4 border rounded-md text-left">
               <h3 className="font-bold text-lg mb-2">Next Steps:</h3>
               <ol className="list-decimal ml-6 space-y-2">
                 <li>
@@ -659,13 +654,13 @@ const EmployeeOnboarding = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-50 rounded-lg shadow">
+    <div className="w-full mx-auto p-6 rounded-lg shadow">
       {/* Admin toggle */}
       {currentStep !== 3 && (
         <div className="mb-4 flex justify-end">
-          <button
+          <Button
             onClick={toggleView}
-            className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md flex items-center"
+            className="text-sm px-3 py-1 rounded-md flex items-center"
           >
             <span className="mr-1">{isHRView ? "Employee" : "HR"} View</span>
             <svg
@@ -682,7 +677,7 @@ const EmployeeOnboarding = () => {
                 d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
               />
             </svg>
-          </button>
+          </Button>
         </div>
       )}
 
@@ -734,26 +729,26 @@ const EmployeeOnboarding = () => {
       </div>
 
       {/* Content area */}
-      <div className="bg-gray-100 p-6 rounded-md">{renderStepContent()}</div>
+      <div className=" p-6 rounded-md">{renderStepContent()}</div>
 
       {/* Navigation buttons */}
       <div className="mt-6 flex justify-between">
-        <button
+        <Button
           onClick={handlePrevious}
           disabled={currentStep === 0}
+          variant="outline"
           className={`px-4 py-2 rounded-md ${
-            currentStep === 0
-              ? "bg-gray-300 cursor-not-allowed"
-              : "bg-gray-200 hover:bg-gray-300"
+            currentStep === 0 ? "cursor-not-allowed" : "hover:bg-gray-300"
           }`}
         >
           Previous
-        </button>
+        </Button>
 
         {currentStep < steps.length - 1 ? (
-          <button
+          <Button
             onClick={handleNext}
             disabled={!isStepCompleted()}
+            variant="outline"
             className={`px-4 py-2 rounded-md ${
               isStepCompleted()
                 ? "bg-blue-600 hover:bg-blue-700 text-white"
@@ -761,14 +756,15 @@ const EmployeeOnboarding = () => {
             }`}
           >
             Next
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
             onClick={() => alert("Onboarding completed!")}
-            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md"
+            className="px-4 py-2 rounded-md"
+            variant="outline"
           >
             Finish
-          </button>
+          </Button>
         )}
       </div>
     </div>
