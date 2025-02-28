@@ -9,8 +9,11 @@ const rbacMiddleware = (requiredPermission) => {
 
       // ✅ 1. Admin users bypass all permissions
       if (req.user.userType === "admin") {
+        console.log(req.user);
         return next();
       }
+
+      console.log(req.user);
 
       // ✅ 2. Get user's roles & permissions
       const userRoles = req.user.roles || [];

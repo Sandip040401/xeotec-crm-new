@@ -4,14 +4,23 @@ const sendMail = require("../../CRM/Email/emailService");
 const emailTemplates = require("../../CRM/Email/emailTemplates");
 const getMaskedEmail = require("../../../common/utils/maskEmail");
 const User = require("../../CRM/User/models/User");
+const AdminUser = require("../../CRM/User/models/AdminUser");
 
 const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({
+    let user = null;
+
+    user = await User.findOne({
       email,
     });
+
+    if (!user) {
+      user = await AdminUser.findOne({
+        email,
+      });
+    }
 
     if (!user) {
       return res.status(404).json({
