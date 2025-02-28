@@ -59,11 +59,11 @@ const Role = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 w-full">
       <h1 className="text-2xl font-bold mb-4">Roles</h1>
       <Card>
         <CardContent className="p-4">
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 mb-10">
             <Input
               placeholder="Add new role"
               value={newRole}
