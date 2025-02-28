@@ -11,8 +11,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 const Employee = () => {
+  const navigate = useNavigate();
   const [employees, setEmployees] = useState([
     {
       id: 1,
@@ -40,7 +42,9 @@ const Employee = () => {
               <Label>Search Employees</Label>
               <Input placeholder="Search..." />
             </div>
-            <Button>Add Employee</Button>
+            <Button onClick={() => navigate("add-employee")}>
+              Add Employee
+            </Button>
           </div>
           <Table>
             <TableHeader>
