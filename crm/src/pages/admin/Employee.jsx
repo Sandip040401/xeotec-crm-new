@@ -31,7 +31,7 @@ const Employee = () => {
   ]);
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6">
+    <div className="w-full mx-auto mt-10 p-6">
       <Card>
         <CardHeader>
           <CardTitle>Employees</CardTitle>
@@ -42,7 +42,7 @@ const Employee = () => {
               <Label>Search Employees</Label>
               <Input placeholder="Search..." />
             </div>
-            <Button onClick={() => navigate("add-employee")}>
+            <Button onClick={() => navigate("/admin/add-employee")}>
               Add Employee
             </Button>
           </div>

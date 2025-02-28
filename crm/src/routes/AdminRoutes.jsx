@@ -16,6 +16,7 @@ export const AdminRoutes = [
     <Route path="profile" element={<AdminProfile />} />
     <Route path="project" element={<Project />} />
     <Route path="employee" element={<Employee />} />
+
     <Route path="setting" element={<Settings />} />
     <Route path="department" element={<Department />} />
     <Route path="department" element={<Department />} />

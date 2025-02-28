@@ -57,7 +57,7 @@ const Sidebar = () => {
           active={location.pathname === "/admin/department"}
         />
         <SidebarItem
-          to="/employee"
+          to="/admin/employee"
           icon={<Users className="" />}
           label="Employee"
           isOpen={isOpen}
