@@ -78,13 +78,13 @@ const Department = () => {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-6 w-full ">
       <h1 className="text-2xl font-bold mb-4">Departments</h1>
       <Card>
         <CardContent className="p-4">
           <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
             <DialogTrigger asChild>
-              <Button>Add Department</Button>
+              <Button>Create Department</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
@@ -117,7 +117,7 @@ const Department = () => {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-          <Table>
+          <Table className="mt-9">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
