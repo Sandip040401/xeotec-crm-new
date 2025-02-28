@@ -9,8 +9,8 @@ import {
   FolderKanban,
   ClipboardList,
   GraduationCap,
-  Menu,
   Landmark,
+  SquareMenu,
 } from "lucide-react"; // ShadCN Icons
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -24,24 +24,24 @@ const Sidebar = () => {
   return (
     <div
       className={cn(
-        "h-full text-sm bg-white text-black shadow-xl flex flex-col p-4 rounded-r-md transition-all duration-300",
+        "h-full  dark:bg-black bg-white   dark:text-white shadow-xl flex flex-col p-4 rounded-r-md transition-all duration-300",
         isOpen ? "w-64" : "w-20"
       )}
     >
       {/* Sidebar Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center  justify-between mb-6">
         <Button
           variant="ghost"
           size="icon"
-          className="text-black hover:bg-white/20 transition"
+          className="text-black dark:text-white hover:bg-white/20 transition"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Menu size={25} />
+          <SquareMenu />
         </Button>
       </div>
 
       {/* Navigation Links */}
-      <nav className="flex flex-col space-y-2 flex-grow">
+      <nav className="flex flex-col space-y-2 flex-grow text-xs">
         <SidebarItem
           to="/admin"
           icon={<Home className="" />}
@@ -124,8 +124,8 @@ const SidebarItem = ({ to, icon, label, isOpen, active }) => {
     <Link
       to={to}
       className={cn(
-        "flex items-center space-x-4 p-3 rounded-lg font-medium transition-all duration-300 text-sm",
-        active ? "bg-white/20 text-black shadow-lg" : "hover:bg-white/10 "
+        "flex items-center space-x-4 p-3 rounded-lg font-medium transition-all duration-300 text-xs",
+        active ? "bg-white/20 shadow-lg" : "hover:bg-white/10 "
       )}
     >
       {icon}

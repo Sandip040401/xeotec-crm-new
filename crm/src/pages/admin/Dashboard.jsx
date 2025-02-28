@@ -20,7 +20,6 @@ import {
   Legend,
 } from "recharts";
 import { Button } from "@/components/ui/button";
-import { FaUsers, FaExchangeAlt, FaGlobe, FaChartPie } from "react-icons/fa";
 const stats = [
   { title: "Total Users", value: "1,250" },
   { title: "New Leads", value: "320" },
