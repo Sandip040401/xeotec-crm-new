@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import roleService from "@/services/roleService";
 import {
   Table,
   TableHeader,
@@ -39,6 +40,17 @@ const Role = () => {
 
   useEffect(() => {
     setRoles(dummyRoles);
+  }, []);
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await roleService.fetch();
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDepartments();
   }, []);
 
   const addRole = () => {

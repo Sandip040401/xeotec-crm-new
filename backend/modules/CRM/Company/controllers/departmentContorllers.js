@@ -36,9 +36,7 @@ const createDepartment = async (req, res) => {
 
 const getDepartments = async (req, res) => {
   try {
-    const departments = await Department.find({
-      company: "67b70814423934916b53f80d",
-    });
+    const departments = await Department.find();
     res.json({
       success: true,
       data: departments,

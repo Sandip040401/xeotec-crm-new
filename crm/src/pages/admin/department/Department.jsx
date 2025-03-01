@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import EditDepartment from "./EditDepartment";
+import departmentService from "@/services/departmentService";
 
 const dummyData = [
   {
@@ -55,17 +56,9 @@ const Department = () => {
   }, []);
 
   const addDepartment = () => {
-    if (newDept.trim() !== "") {
-      const newDepartment = {
-        _id: (departments.length + 1).toString(),
-        name: newDept,
-        managers: [],
-        employees: [],
-      };
-      setDepartments([...departments, newDepartment]);
-      setNewDept("");
-      setDialogOpen(false);
-    }
+    // setDepartments([...departments, newDepartment]);
+    setNewDept("");
+    setDialogOpen(false);
   };
 
   const deleteDepartment = (id) => {
@@ -76,6 +69,18 @@ const Department = () => {
     setEditDept(dept);
     setDialogOpen(true);
   };
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await departmentService.fetch();
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDepartments();
+  }, []);
 
   return (
     <div className="p-6 w-full ">

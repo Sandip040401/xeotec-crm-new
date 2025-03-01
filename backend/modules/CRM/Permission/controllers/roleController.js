@@ -28,10 +28,7 @@ exports.createRole = async (req, res) => {
 // Get all roles
 exports.getRoles = async (req, res) => {
   try {
-    const roles = await Role.find().populate(
-      "permissions.permissionId",
-      "name"
-    );
+    const roles = await Role.find()
     res.json({ success: true, count: roles.length, data: roles });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
