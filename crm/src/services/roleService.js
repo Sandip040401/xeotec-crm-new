@@ -27,7 +27,7 @@ const roleService = {
 
     // Delete a role by ID
     delete: async (id) => {
-        const response = await api.delete(`/api//roles/${id}`); // Adjusted endpoint path to match the backend
+        const response = await api.delete(`/api/roles/${id}`); // Adjusted endpoint path to match the backend
         return response;
     },
 

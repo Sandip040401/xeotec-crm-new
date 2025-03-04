@@ -29,7 +29,7 @@ companyRouter.get("/", verifyToken, verifySuperAdmin, getCompanies);
 // routes for department management
 companyRouter.post(
   "/department/create",
-  validate(departmentSchema),
+  // validate(departmentSchema),
   createDepartment
 );
 companyRouter.get("/department", getDepartments);
