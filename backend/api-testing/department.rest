@@ -8,5 +8,17 @@ Content-Type: application/json
     "company": "67b70814423934916b53f80d"
 }
 
-###
+### Get all departments
 GET http://localhost:8000/api/company/department
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MTA3NDQyNiwiZXhwIjoxNzQxMDg1MjI2fQ.npeyQ0UN2zylB37P-42adwHhxQw4xj_wk0js-qVyebo
+
+
+### add employee to department
+POST http://localhost:8000/api/company/department/add-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MTA3NDQyNiwiZXhwIjoxNzQxMDg1MjI2fQ.npeyQ0UN2zylB37P-42adwHhxQw4xj_wk0js-qVyebo
+
+{
+    "departmentId": "67c59a77c73b8c4e82417da3",
+    "userId": "67c1e1380a8e63a8218e6a6a"
+}

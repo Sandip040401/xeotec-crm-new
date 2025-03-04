@@ -1,15 +1,17 @@
 ### create a role
 POST http://localhost:8000/api/roles/create
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MTA3NDQyNiwiZXhwIjoxNzQxMDg1MjI2fQ.npeyQ0UN2zylB37P-42adwHhxQw4xj_wk0js-qVyebo
 
 {
-    "name": "HR",
-    "description": "Human Resource",
-    "companyId": "67b70814423934916b53f80d"
+    "name": "Sales Head",
+    "description": "Sales Head of the company"
 }
 
 ### get all roles
 GET http://localhost:8000/api/roles
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MTA3NDQyNiwiZXhwIjoxNzQxMDg1MjI2fQ.npeyQ0UN2zylB37P-42adwHhxQw4xj_wk0js-qVyebo
+
 
 ### get role by id
 GET http://localhost:8000/api/roles/67b8d43db120a776a778d175
@@ -17,8 +19,9 @@ GET http://localhost:8000/api/roles/67b8d43db120a776a778d175
 ### assign permission to role
 POST http://localhost:8000/api/roles/assign-permission
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MTA3NDQyNiwiZXhwIjoxNzQxMDg1MjI2fQ.npeyQ0UN2zylB37P-42adwHhxQw4xj_wk0js-qVyebo
 
 {
-    "roleId": "67b8d43db120a776a778d175",
-    "permissionId": "67b8d1f8341578af58754744"
+    "roleId": "67c6c1f97a6bc6ea441d7e24",
+    "permissionId": "67c6c147cb26bf7778e0f766"
 }

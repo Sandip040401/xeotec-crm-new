@@ -14,14 +14,17 @@ const userRouter = express.Router();
 
 userRouter.post(
   "/user/create",
-  validate(userSchema),
   verifyToken,
   rbacMiddleware("hr:user:create"),
+  validate(userSchema),
   createUser
 );
 userRouter.get("/user", verifyToken, rbacMiddleware("hr:user:view"), getUsers);
 
-userRouter.post("/user/assign-role", assignRole);
-userRouter.get("/user/permissions", getUserPermissions);
+userRouter.post("/user/assign-role",
+  verifyToken,
+  rbacMiddleware("hr:user:assign-role"),
+  assignRole);
+userRouter.get("/user/permissions",verifyToken, getUserPermissions);
 
 module.exports = userRouter;

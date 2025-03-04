@@ -3,7 +3,8 @@ const Role = require("../models/Role");
 // Create a new role
 exports.createRole = async (req, res) => {
   try {
-    const { companyId, name, description, permissions } = req.body;
+    const { name, description } = req.body;
+    const companyId = req.user.companyId;
 
     // Check for duplicate role in the company
     const existingRole = await Role.findOne({ companyId, name });
@@ -16,7 +17,7 @@ exports.createRole = async (req, res) => {
         });
     }
 
-    const role = new Role({ companyId, name, description, permissions });
+    const role = new Role({ companyId, name, description });
     await role.save();
 
     res.status(201).json({ success: true, data: role });
@@ -28,7 +29,9 @@ exports.createRole = async (req, res) => {
 // Get all roles
 exports.getRoles = async (req, res) => {
   try {
-    const roles = await Role.find().populate(
+    const roles = await Role.find({
+      companyId: req.user.companyId,
+    }).populate(
       "permissions.permissionId",
       "name"
     );

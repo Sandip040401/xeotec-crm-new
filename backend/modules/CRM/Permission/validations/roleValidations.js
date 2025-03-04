@@ -10,9 +10,6 @@ const objectIdValidator = Joi.string()
   }, "ObjectId validation");
 
 const roleSchema = Joi.object({
-  companyId: objectIdValidator.required().messages({
-    "any.required": "Company ID is required",
-  }),
   name: Joi.string().required().trim().messages({
     "string.empty": "Role name is required",
   }),

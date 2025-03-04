@@ -217,7 +217,7 @@ const revokePermission = async (req, res) => {
 
 const getUserPermissions = async (req, res) => {
   try {
-    const userId = "67b8c87c0e5dc51df9bd96f1";
+    const userId = req.user._id;
 
     if (!userId) {
       return res.status(401).json({ message: "Unauthorized" });

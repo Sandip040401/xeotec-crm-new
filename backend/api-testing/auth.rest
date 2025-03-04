@@ -3,6 +3,9 @@ POST http://localhost:8000/api/auth/user/login
 Content-Type: application/json
 
 {
-    "email": "sidhant0121@gmail.com",
+    "email": "anupam@xeotec.in",
     "password": "aksinghweb"
 }
+
+### Logout
+POST http://localhost:8000/api/auth/user/logout
