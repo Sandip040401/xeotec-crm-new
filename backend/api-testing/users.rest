@@ -21,10 +21,10 @@ Content-Type: application/json
     "roleId": "67b8d43db120a776a778d175"
 }
 
-### Get all permissions
+### Get all permissions of a user
 GET http://localhost:8000/api/users/user/permissions
 
 ### Get all users
 GET http://localhost:8000/api/users/user
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YmMwYzBkMjU4NGUwYTNhYTcxYzgzOCIsImVtYWlsIjoiYWtzaW5naDI0ODZAZ21haWwuY29tIiwidXNlclR5cGUiOiJhZG1pbiIsImlhdCI6MTc0MDc1OTMyNCwiZXhwIjoxNzQwNzcwMTI0fQ.Q4H9KfI_Btozja2ZXKlHkULDI9_W1LaPiALNjmTY0RM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3YjhjODdjMGU1ZGM1MWRmOWJkOTZmMSIsImVtYWlsIjoiYW51cGFtQHhlb3RlYy5pbiIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTc0MTA4MjQzNiwiZXhwIjoxNzQxMDkzMjM2fQ.OKXdEbcKCiY5WdcZwdhhWO_C4OhU-DQ4i8ivhHucJJY

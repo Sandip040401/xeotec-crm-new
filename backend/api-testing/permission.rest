@@ -1,13 +1,14 @@
 ### create a permission
 POST http://localhost:8000/api/permission/create
 Content-Type: application/json
+Authorization: Bearer 
 
 {
-    "name": "user:user:view",
-    "module": "user",
-    "resource": "user",
+    "name": "company:role:create",
+    "module": "company",
+    "resource": "role",
     "action": "create",
-    "description": "Permission to create a user"
+    "description": "Permission to create a role"
 }
 
 ### get all permissions
