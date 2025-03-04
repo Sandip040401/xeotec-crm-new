@@ -5,16 +5,16 @@ const createDepartment = async (req, res) => {
   try {
     const { name, company, description } = req.body;
 
-    if (!company) {
-      return res.status(404).json({
-        success: false,
-        error: "Company not found",
-      });
-    }
+    // if (!company) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     error: "Company not found",
+    //   });
+    // }
 
     const department = await Department.create({
       name,
-      company,
+      company: "67b70814423934916b53f80d",
       description,
     });
 
@@ -22,9 +22,11 @@ const createDepartment = async (req, res) => {
       $push: { departments: department._id },
     });
 
+    const newData = await Department.find()
+
     res.status(201).json({
       success: true,
-      data: department,
+      data: newData,
     });
   } catch (error) {
     res.status(400).json({
