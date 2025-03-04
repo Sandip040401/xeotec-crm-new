@@ -22,50 +22,31 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import EditDepartment from "./EditDepartment";
-
-const dummyData = [
-  {
-    _id: "1",
-    name: "Sales",
-    managers: [{ name: "Alice" }],
-    employees: [{ name: "Bob" }, { name: "Charlie" }],
-  },
-  {
-    _id: "2",
-    name: "Marketing",
-    managers: [{ name: "Dave" }],
-    employees: [{ name: "Eve" }],
-  },
-  {
-    _id: "3",
-    name: "HR",
-    managers: [{ name: "Frank" }],
-    employees: [{ name: "Grace" }],
-  },
-];
+import departmentService from "@/services/departmentService";
 
 const Department = () => {
   const [departments, setDepartments] = useState([]);
   const [newDept, setNewDept] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editDept, setEditDept] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+  });
 
-  useEffect(() => {
-    setDepartments(dummyData);
-  }, []);
+  const addDepartment = async (e) => {
+    // setDepartments([...departments, newDepartment]);
 
-  const addDepartment = () => {
-    if (newDept.trim() !== "") {
-      const newDepartment = {
-        _id: (departments.length + 1).toString(),
-        name: newDept,
-        managers: [],
-        employees: [],
-      };
-      setDepartments([...departments, newDepartment]);
-      setNewDept("");
-      setDialogOpen(false);
+    try {
+      const response = await departmentService.create(formData);
+      setDepartments(response.data.data);
+    } catch (error) {
+    } finally {
+      // setLoading(false);
     }
+    console.log(formData);
+
+    setDialogOpen(false);
   };
 
   const deleteDepartment = (id) => {
@@ -76,6 +57,19 @@ const Department = () => {
     setEditDept(dept);
     setDialogOpen(true);
   };
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await departmentService.fetch();
+        setDepartments(response.data.data);
+      } catch (error) {
+      } finally {
+        // setLoading(false);
+      }
+    };
+    fetchDepartments();
+  }, []);
 
   return (
     <div className="p-6 w-full ">
@@ -104,15 +98,35 @@ const Department = () => {
                   </Label>
                   <Input
                     id="name"
-                    value={editDept ? editDept.name : newDept}
-                    onChange={(e) => setNewDept(e.target.value)}
+                    // value={editDept ? editDept.name : newDept}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        name: e.target.value,
+                      });
+                    }}
+                    className="col-span-3"
+                  />
+                  <Label htmlFor="description" className="text-right">
+                    Description
+                  </Label>
+                  <Input
+                    id="description"
+                    // value={editDept ? editDept.name : newDept}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        description: e.target.value,
+                      });
+                    }}
                     className="col-span-3"
                   />
                 </div>
               </div>
               <DialogFooter>
                 <Button onClick={addDepartment}>
-                  {editDept ? "Save Changes" : "Save"}
+                  {/* {editDept ? "Save Changes" : "Save"} */}
+                  Save
                 </Button>
               </DialogFooter>
             </DialogContent>
@@ -127,34 +141,36 @@ const Department = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {departments.map((dept) => (
-                <TableRow key={dept._id}>
-                  <TableCell>{dept.name}</TableCell>
-                  <TableCell>
-                    {dept.managers?.map((mgr) => mgr.name).join(", ") || "None"}
-                  </TableCell>
-                  <TableCell>
-                    {dept.employees?.map((emp) => emp.name).join(", ") ||
-                      "None"}
-                  </TableCell>
-                  <TableCell className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => editDepartment(dept)}
-                    >
-                      <Edit size={16} />
-                    </Button>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => deleteDepartment(dept._id)}
-                    >
-                      <Trash size={16} />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {departments &&
+                departments?.map((dept) => (
+                  <TableRow key={dept._id}>
+                    <TableCell>{dept.name}</TableCell>
+                    <TableCell>
+                      {dept.managers?.map((mgr) => mgr.name).join(", ") ||
+                        "None"}
+                    </TableCell>
+                    <TableCell>
+                      {dept.employees?.map((emp) => emp.name).join(", ") ||
+                        "None"}
+                    </TableCell>
+                    <TableCell className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => editDepartment(dept)}
+                      >
+                        <Edit size={16} />
+                      </Button>
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => deleteDepartment(dept._id)}
+                      >
+                        <Trash size={16} />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </CardContent>
